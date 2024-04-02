@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.github.lvcongzheng520.springdoc.autoconfigure.SpringDocAutoConfiguration

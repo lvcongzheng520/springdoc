@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <!-- 定义项目的模型版本 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 基础信息 -->
+    <groupId>io.github.lvcongzheng520</groupId>
+    <!-- 项目唯一标识 -->
+    <artifactId>springdoc</artifactId>
+    <!-- 项目打包类型，默认为 jar，此处为 pom，表示这是一个聚合模块 -->
+    <packaging>jar</packaging>
+    <!-- 项目版本号 -->
+    <version>${revision}</version>
+
+    <!-- 项目名称 -->
+    <name>springdoc</name>
+    <!-- 项目介绍 -->
+    <description>基于 javadoc 无注解零入侵生成规范的 openapi 结构体。</description>
+    <!-- 项目链接 -->
+    <url>https://github.com/lvcongzheng520/springdoc</url>
+
+
+    <!-- 所有模块 -->
+    <modules>
+
+    </modules>
+
+
+    <!-- 开源协议 Apache 2.0 -->
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+
+    <!--属性配置 -->
+    <properties>
+
+        <!-- 发布版本 -->
+        <revision>1.0.3</revision>
+
+        <!-- 服务id 也就是setting.xml中的servers.server.id -->
+        <serverId>central</serverId>
+
+        <!-- 基本属性配置 -->
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- 依赖版本 -->
+        <springdoc.version>1.6.14</springdoc.version>
+
+    </properties>
+
+
+    <!-- 仓库信息 -->
+    <scm>
+        <!-- 标签名称 -->
+        <tag>master</tag>
+        <!-- Git 仓库地址 -->
+        <url>https://github.com/lvcongzheng520/springdoc.git</url>
+        <!-- 连接 URL -->
+        <connection>scm:git:https://github.com/lvcongzheng520/springdoc.git</connection>
+        <!-- 开发者连接 URL -->
+        <developerConnection>scm:git:https://github.com/lvcongzheng520/springdoc.git</developerConnection>
+    </scm>
+
+    <!-- 作者信息 -->
+    <developers>
+        <developer>
+            <name>hsqyz</name>
+            <email>1926585708@qq.com</email>
+        </developer>
+    </developers>
+
+    <!-- 父仓库 -->
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+        <!-- 不引用父项目的 POM 文件 -->
+        <relativePath/>
+    </parent>
+
+    <!-- 仓库依赖 -->
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webmvc-core</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-javadoc</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.26</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
+            <version>4.4.0</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <!-- 版本控制 -->
+    <dependencyManagement>
+        <dependencies>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 项目构建 -->
+    <build>
+        <plugins>
+
+            <!-- 编译插件，设置源码以及编译的jdk版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.source}</target>
+                    <!-- 指定字符集 -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- 生成源代码 JAR 包插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <!-- 设置在 package 阶段执行该任务 -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 生成不进行 fork 的源代码 JAR 包 -->
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 生成 Java 文档 JAR 包插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <!-- 关闭文档 lint 检查 -->
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 生成 Java 文档 JAR 包 -->
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- GPG 签名插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <!-- 设置在 verify 阶段执行签名 -->
+                        <phase>verify</phase>
+                        <goals>
+                            <!-- 生成 GPG 签名 -->
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--新账号的配置：将组件部署到OSSRH并将其发布到Central Repository-->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.4.0</version>
+                <!-- 将其作为 Maven 的扩展 -->
+                <extensions>true</extensions>
+                <configuration>
+                    <!-- 指定发布服务器 ID -->
+                    <publishingServerId>${serverId}</publishingServerId>
+                    <!-- 使用 token 认证方式 -->
+                    <tokenAuth>true</tokenAuth>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <!-- 分布式构建和部署管理配置 -->
+    <distributionManagement>
+        <!-- 快照仓库配置 -->
+        <snapshotRepository>
+            <!-- 与settings.xml的server.id保持一致 -->
+            <id>${serverId}</id>
+            <url>https://central.sonatype.com/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
+</project>
